@@ -13,6 +13,12 @@
 
 .prompt {
     font-size: var(--h1-font-size);
+    opacity: 1;
+    transition: opacity 0.5s ease-in-out;
+}
+
+.prompt.hidden {
+    opacity: 0;
 }
 
 .input-container {
@@ -28,11 +34,22 @@
     overflow: hidden;
 }
 
+@media screen and (max-width: 480px) {
+    .input-container {
+        width: 75%;
+    }
+}
+
 input {
     padding: 10px;
     font-size: var(--normal-font-size);
     border: none;
     flex-grow: 1;
+}
+
+input::placeholder {
+    color: #ccc;
+    font-style: italic;
 }
 
 input:focus {
@@ -42,8 +59,8 @@ input:focus {
 
 .input-btn {
     background-color: #ffffff;
-    border: 2px solid #BDE0FE;
-    padding: 5px 7px;
+    border: 2px solid #ccc;
+    padding: 1px 3px;
     font-size: var(--normal-font-size);
     border-radius: 30px;
     margin: 15px;
@@ -66,7 +83,7 @@ input:focus {
 }
 
 .input-btn .arrow {
-    stroke: #BDE0FE;
+    stroke: #ccc;
 }
 
 .input-btn:hover .arrow {
