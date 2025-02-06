@@ -9,6 +9,7 @@ const Intro = ({ onFormSubmit }) => {
     const [season, setSeason] = useState("");
     const [yarnType, setYarnType] = useState("");
     const [step, setStep] = useState(0);
+    const [fade, setFade] = useState(false);
 
     const navigate = useNavigate();  // Initialize useNavigate
 
@@ -18,36 +19,36 @@ const Intro = ({ onFormSubmit }) => {
     };
 
     const handleNextStep = () => {
-        // Update the values based on the current step
-        if (step === 0) {
-            setItem(input);
-        } else if (step === 1) {
-            setWeight(input);
-        } else if (step === 2) {
-            setSeason(input);
-        } else if (step === 3) {
-            setYarnType(input);
-        }
-
-        // Clear input after updating
-        setInput("");
-
-        if (step === 3) {
-            // Pass the data to the parent component for storage
-            onFormSubmit(item, weight, season, input);  // Use input directly for yarnType
-
-            // Navigate to /home after data submission
-            navigate('/home');
-        } else {
-            // If not last step, increment step
-            setStep(step + 1);
-        }
+        setFade(true); // Start fade-out effect
+    
+        setTimeout(() => {
+            if (step === 0) {
+                setItem(input);
+            } else if (step === 1) {
+                setWeight(input);
+            } else if (step === 2) {
+                setSeason(input);
+            } else if (step === 3) {
+                setYarnType(input);
+            }
+    
+            setInput("");
+    
+            if (step === 3) {
+                onFormSubmit(item, weight, season, input);
+                navigate('/home');
+            } else {
+                setStep(step + 1);
+            }
+    
+            setFade(false); // Start fade-in effect
+        }, 300); 
     };
 
     const getQuestion = () => {
         switch (step) {
             case 0:
-                return "Hi! What would you like to make?";
+                return "What would you like to make?";
             case 1:
                 return "What is the yarn weight?";
             case 2:
@@ -76,7 +77,8 @@ const Intro = ({ onFormSubmit }) => {
 
     return (
         <div className='intro container'>
-            <h1 className='prompt'>{getQuestion()}</h1>
+            <h1 className='prompt'>Howdy!</h1>
+            <h1 className={`prompt ${fade ? 'hidden' : ''}`}>{getQuestion()}</h1>
             {step < 4 && (
                 <div className="input-container">
                     <input 
@@ -86,8 +88,8 @@ const Intro = ({ onFormSubmit }) => {
                     />
                     <button className='input-btn' onClick={handleNextStep}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path className="arrow" d="M12 36V6" stroke-dasharray="15" stroke-dashoffset="15"></path>
-                            <path className="arrow" d="M5 11l7-7 7 7"></path>
+                            <path className="arrow" d="M12 40V6" strokeDasharray="15" strokeDashoffset="15"></path>
+                            <path className="arrow" d="M5 14l7-7 7 7"></path>
                         </svg>
                     </button>
                 </div>
