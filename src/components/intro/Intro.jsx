@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import "./intro.css";
 
-const Intro = () => {
+const Intro = ({ onFormSubmit }) => {
     const [input, setInput] = useState("");
     const [item, setItem] = useState("");
     const [weight, setWeight] = useState("");
@@ -9,12 +10,15 @@ const Intro = () => {
     const [yarnType, setYarnType] = useState("");
     const [step, setStep] = useState(0);
 
-    // function to grab user's input
+    const navigate = useNavigate();  // Initialize useNavigate
+
+    // Function to grab user's input
     const onType = (event) => {
         setInput(event.target.value);
     };
 
     const handleNextStep = () => {
+        // Update the values based on the current step
         if (step === 0) {
             setItem(input);
         } else if (step === 1) {
@@ -24,8 +28,20 @@ const Intro = () => {
         } else if (step === 3) {
             setYarnType(input);
         }
-        setInput(""); 
-        setStep(step + 1);
+
+        // Clear input after updating
+        setInput("");
+
+        if (step === 3) {
+            // Pass the data to the parent component for storage
+            onFormSubmit(item, weight, season, input);  // Use input directly for yarnType
+
+            // Navigate to /home after data submission
+            navigate('/home');
+        } else {
+            // If not last step, increment step
+            setStep(step + 1);
+        }
     };
 
     const getQuestion = () => {
@@ -70,16 +86,12 @@ const Intro = () => {
                     />
                     <button className='input-btn' onClick={handleNextStep}>
                         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                            <path class="arrow" d="M12 36V6" stroke-dasharray="15" stroke-dashoffset="15"></path>
-                            <path class="arrow" d="M5 11l7-7 7 7"></path>
+                            <path className="arrow" d="M12 36V6" stroke-dasharray="15" stroke-dashoffset="15"></path>
+                            <path className="arrow" d="M5 11l7-7 7 7"></path>
                         </svg>
                     </button>
                 </div>
             )}
-            <h2>Clothing Item: {item}</h2>
-            <h2>Yarn weight: {weight}</h2>
-            <h2>Season: {season}</h2>
-            <h2>Yarn type: {yarnType}</h2>
         </div>
     );
 };
