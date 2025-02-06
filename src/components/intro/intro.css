@@ -1,0 +1,74 @@
+.intro {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-image: 
+    repeating-linear-gradient(0deg, rgba(189,224,254, 0.22) 0px, rgba(189,224,254, 0.22) 35px,transparent 35px, transparent 70px),
+    repeating-linear-gradient(90deg, rgba(189,224,254, 0.22) 0px, rgba(189,224,254, 0.22) 35px,transparent 35px, transparent 70px),
+    linear-gradient(90deg, rgb(255,255,255),rgb(255,255,255));
+}
+
+.prompt {
+    font-size: var(--h1-font-size);
+}
+
+.input-container {
+    background-color: #ffffff;
+    margin: 15px auto;
+    width: 50%;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+input {
+    padding: 10px;
+    font-size: var(--normal-font-size);
+    border: none;
+    flex-grow: 1;
+}
+
+input:focus {
+    border: none;
+    outline: none;
+}
+
+.input-btn {
+    background-color: #ffffff;
+    border: 2px solid #BDE0FE;
+    padding: 5px 7px;
+    font-size: var(--normal-font-size);
+    border-radius: 30px;
+    margin: 15px;
+    transition: 0.3s;
+    cursor: pointer;
+}
+
+.input-btn:hover {
+    background-color: #BDE0FE;
+    border: 2px solid #BDE0FE;
+    color: #000000;
+}
+
+.input-btn svg {
+    transition: transform 0.2s ease-in-out;
+}
+
+.input-btn:hover svg {
+    transform: translateY(-2px);
+}
+
+.input-btn .arrow {
+    stroke: #BDE0FE;
+}
+
+.input-btn:hover .arrow {
+    stroke: #ffffff;
+}
